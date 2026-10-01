@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobility Operations Intelligence Tool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<nav>
+    <div class="nav-title">Mobility Operations Intelligence Tool</div>
+
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/drivers">Drivers</a>
+        <a href="/zones">Zones</a>
+        <a href="/utilization">Utilization</a>
+        <a href="/cancellations">Cancellations</a>
+        <a href="/anomalies">Anomalies</a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="hero">
+        <h1>Mobility Operations Intelligence Tool</h1>
+
+        <p>
+            Analyze driver performance, trip activity,
+            zone demand, utilization, cancellations and
+            operational anomalies.
+        </p>
+    </div>
+
+    {% if error %}
+    <div class="alert error">
+        {{ error }}
+    </div>
+    {% endif %}
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert {{ category }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <div class="card">
+        <h2>Upload Mobility Data</h2>
+
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+
+            <div class="upload-group">
+                <label>Drivers CSV</label>
+                <input type="file" name="drivers" accept=".csv" required>
+            </div>
+
+            <div class="upload-group">
+                <label>Trips CSV</label>
+                <input type="file" name="trips" accept=".csv" required>
+            </div>
+
+            <div class="upload-group">
+                <label>Driver Activity CSV</label>
+                <input type="file" name="activity" accept=".csv" required>
+            </div>
+
+            <button type="submit">
+                Upload and Analyze
+            </button>
+
+        </form>
+    </div>
+
+    <div class="card">
+        <h2>Existing Dataset</h2>
+
+        <p>
+            The application currently contains the sample mobility
+            dataset.
+        </p>
+
+        <a class="button" href="/dashboard">
+            Open Dashboard
+        </a>
+    </div>
+
+</div>
+
+</body>
+</html>

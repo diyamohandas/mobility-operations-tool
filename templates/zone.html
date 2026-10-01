@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zone Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<nav>
+    <div class="nav-title">Mobility Operations Intelligence Tool</div>
+
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/drivers">Drivers</a>
+        <a href="/zones">Zones</a>
+        <a href="/utilization">Utilization</a>
+        <a href="/cancellations">Cancellations</a>
+        <a href="/anomalies">Anomalies</a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <h1>Zone Demand Analysis</h1>
+
+    <div class="card">
+
+        <h2>Top Zones by Demand</h2>
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Zone</th>
+                    <th>Trip Demand</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+            {% for zone in zones %}
+
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ zone[0] }}</td>
+                    <td>{{ zone[1] }}</td>
+                </tr>
+
+            {% else %}
+
+                <tr>
+                    <td colspan="3">
+                        No zone data available.
+                    </td>
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>

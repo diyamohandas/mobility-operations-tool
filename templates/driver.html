@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Driver Analysis - Mobility Operations</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<nav>
+
+    <div class="nav-title">
+        Mobility Operations Intelligence Tool
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/">Home</a>
+
+        <a href="/dashboard">
+            Dashboard
+        </a>
+
+        <a href="/drivers">
+            Drivers
+        </a>
+
+        <a href="/zones">
+            Zones
+        </a>
+
+        <a href="/utilization">
+            Utilization
+        </a>
+
+        <a href="/cancellations">
+            Cancellations
+        </a>
+
+        <a href="/anomalies">
+            Anomalies
+        </a>
+
+    </div>
+
+</nav>
+
+
+<div class="container">
+
+    <h1>Driver Analysis</h1>
+
+    <p>
+        Driver performance based on completed trips and revenue.
+    </p>
+
+
+    <div class="card">
+
+        <h2>Top Drivers by Revenue</h2>
+
+        {% if drivers %}
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Rank</th>
+
+                    <th>Driver ID</th>
+
+                    <th>Revenue</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for driver in drivers %}
+
+                <tr>
+
+                    <td>
+                        {{ loop.index }}
+                    </td>
+
+                    <td>
+                        {{ driver[0] }}
+                    </td>
+
+                    <td>
+                        ₹{{ "%.2f"|format(driver[1]) }}
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        {% else %}
+
+        <div class="alert error">
+
+            No driver revenue data available.
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>Driver Operations</h2>
+
+        <p>
+            Use the navigation menu to explore driver utilization,
+            trip activity, cancellations and operational anomalies.
+        </p>
+
+        <div class="quick-links">
+
+            <a class="button"
+               href="/utilization">
+                Driver Utilization
+            </a>
+
+            <a class="button"
+               href="/cancellations">
+                Cancellation Analysis
+            </a>
+
+            <a class="button"
+               href="/anomalies">
+                Operational Anomalies
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

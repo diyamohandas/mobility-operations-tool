@@ -1,0 +1,9 @@
+driver_id,driver_name,city,vehicle_type,rating,status
+D101,Arun,Bangalore,Sedan,4.8,Active
+D102,Rahul,Bangalore,SUV,4.7,Active
+D103,Priya,Bangalore,Hatchback,4.5,Active
+D104,Meena,Chennai,Sedan,4.9,Active
+D105,Kiran,Chennai,SUV,4.2,Inactive
+D106,Anjali,Hyderabad,Hatchback,4.6,Active
+D107,Vikram,Hyderabad,Sedan,3.9,Active
+D108,Suresh,Bangalore,Sedan,4.1,Inactive

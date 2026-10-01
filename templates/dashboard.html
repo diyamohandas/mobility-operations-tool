@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Mobility Operations</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<nav>
+    <div class="nav-title">Mobility Operations Intelligence Tool</div>
+
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/drivers">Drivers</a>
+        <a href="/zones">Zones</a>
+        <a href="/utilization">Utilization</a>
+        <a href="/cancellations">Cancellations</a>
+        <a href="/anomalies">Anomalies</a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <h1>Operations Dashboard</h1>
+
+    <div class="metrics">
+
+        <div class="metric-card">
+            <h3>Total Trips</h3>
+            <p>{{ summary.total_trips }}</p>
+        </div>
+
+        <div class="metric-card">
+            <h3>Completed Trips</h3>
+            <p>{{ summary.completed_trips }}</p>
+        </div>
+
+        <div class="metric-card">
+            <h3>Cancelled Trips</h3>
+            <p>{{ summary.cancelled_trips }}</p>
+        </div>
+
+        <div class="metric-card">
+            <h3>Total Revenue</h3>
+            <p>₹{{ summary.total_revenue }}</p>
+        </div>
+
+        <div class="metric-card">
+            <h3>Total Drivers</h3>
+            <p>{{ driver_count }}</p>
+        </div>
+
+        <div class="metric-card">
+            <h3>Total Zones</h3>
+            <p>{{ zone_count }}</p>
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <h2>Business Insights</h2>
+
+        {% if insights %}
+
+            <ul class="insight-list">
+
+            {% for insight in insights %}
+                <li>{{ insight }}</li>
+            {% endfor %}
+
+            </ul>
+
+        {% else %}
+
+            <p>No insights available.</p>
+
+        {% endif %}
+
+    </div>
+
+    <div class="quick-links">
+
+        <a class="button" href="/drivers">
+            Driver Analysis
+        </a>
+
+        <a class="button" href="/zones">
+            Zone Analysis
+        </a>
+
+        <a class="button" href="/utilization">
+            Utilization
+        </a>
+
+        <a class="button" href="/cancellations">
+            Cancellations
+        </a>
+
+        <a class="button" href="/anomalies">
+            Anomalies
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

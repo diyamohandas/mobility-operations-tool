@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operational Anomalies</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<nav>
+    <div class="nav-title">Mobility Operations Intelligence Tool</div>
+
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/drivers">Drivers</a>
+        <a href="/zones">Zones</a>
+        <a href="/utilization">Utilization</a>
+        <a href="/cancellations">Cancellations</a>
+        <a href="/anomalies">Anomalies</a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <h1>Operational Anomalies</h1>
+
+    <div class="card">
+
+        <h2>High Fare Trips</h2>
+
+        <p>
+            {{ anomalies.get("high_fare_trips", [])|length }}
+            anomalous trip(s)
+        </p>
+
+        {% for trip in anomalies.get("high_fare_trips", []) %}
+            <div class="anomaly-item">
+                Trip ID: {{ trip.trip_id }}
+            </div>
+        {% endfor %}
+
+    </div>
+
+    <div class="card">
+
+        <h2>Long Distance Trips</h2>
+
+        <p>
+            {{ anomalies.get("long_distance_trips", [])|length }}
+            anomalous trip(s)
+        </p>
+
+        {% for trip in anomalies.get("long_distance_trips", []) %}
+            <div class="anomaly-item">
+                Trip ID: {{ trip.trip_id }}
+            </div>
+        {% endfor %}
+
+    </div>
+
+    <div class="card">
+
+        <h2>Long Duration Trips</h2>
+
+        <p>
+            {{ anomalies.get("long_duration_trips", [])|length }}
+            anomalous trip(s)
+        </p>
+
+        {% for trip in anomalies.get("long_duration_trips", []) %}
+            <div class="anomaly-item">
+                Trip ID: {{ trip.trip_id }}
+            </div>
+        {% endfor %}
+
+    </div>
+
+    <div class="card">
+
+        <h2>Driver Cancellation Anomalies</h2>
+
+        {% for driver_id, count in anomalies.get("driver_cancellation_anomalies", {}).items() %}
+
+            <div class="anomaly-item">
+                Driver {{ driver_id }}:
+                {{ count }} cancellation(s)
+            </div>
+
+        {% else %}
+
+            <p>No driver cancellation anomalies detected.</p>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+</body>
+</html>

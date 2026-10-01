@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver Utilization</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<nav>
+    <div class="nav-title">Mobility Operations Intelligence Tool</div>
+
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/drivers">Drivers</a>
+        <a href="/zones">Zones</a>
+        <a href="/utilization">Utilization</a>
+        <a href="/cancellations">Cancellations</a>
+        <a href="/anomalies">Anomalies</a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <h1>Driver Utilization</h1>
+
+    <div class="card">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Driver ID</th>
+                    <th>Online Hours</th>
+                    <th>Trip Hours</th>
+                    <th>Idle Hours</th>
+                    <th>Utilization Rate</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+            {% for driver_id, data in utilization.items() %}
+
+                <tr>
+
+                    <td>{{ driver_id }}</td>
+
+                    <td>
+                        {{ "%.2f"|format(data.get("online_hours", 0)) }}
+                    </td>
+
+                    <td>
+                        {{ "%.2f"|format(data.get("trip_hours", 0)) }}
+                    </td>
+
+                    <td>
+                        {{ "%.2f"|format(data.get("idle_hours", 0)) }}
+                    </td>
+
+                    <td>
+                        {{ "%.2f"|format(data.get("utilization_rate", 0)) }}%
+                    </td>
+
+                </tr>
+
+            {% else %}
+
+                <tr>
+                    <td colspan="5">
+                        No utilization data available.
+                    </td>
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>
